@@ -32,12 +32,12 @@ if __name__ == "__main__":
     max = 300
     write = 280
 
-    f = 30.e3
+    f = 80.e3
     T = 1.0/f
     E = 50.0
-    E0 = 15.0
+    E0 = 13.7
     L = 1.e-3
-    ir = 3
+    ir = 2.5
 
     D = border(E, E0, L, T, ir)
     print("%f %f" %(D, 0.0), file=fp4)

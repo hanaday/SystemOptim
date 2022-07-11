@@ -31,13 +31,13 @@ if __name__ == "__main__":
     max = 300
     write = 280
 
-    f = 30e3
+    f = 80e3
     T = 1.0/f
     E = 50.0
-    E0 = 25.0
+    E0 = 13.7
     L = 1e-3
     i0 = 0
-    ir = 3
+    ir = 2.5
     h = T/256
 
     sys = 1 # sys = 1 means switch is ON.
