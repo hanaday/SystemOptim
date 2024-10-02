@@ -6,7 +6,7 @@ def SWon(E, E0, L, ik, t):
     return ((E - E0)/L*t + ik)
 
 def SWoff(E0, L, ir, t):
-    return (-E0*t/L + ir)
+    return (-E0/L*t + ir)
 
 def border(E, E0, L, T, ir):
     return (ir - (E - E0)/L*T)
@@ -39,7 +39,7 @@ if __name__ == "__main__":
 
     f = 80e3
     T = 1.0/f
-    E = 20 #50.0
+    E = 50.0
     E0 = 13.7
     L = 1e-3
     ik = 0
@@ -55,11 +55,7 @@ if __name__ == "__main__":
         Range_t = np.arange(0, T+h, h)
         for idx, t in enumerate(Range_t):
             if ik <= D:
-                #if t <= (T - 3*h):
                 ik1 = SWon(E, E0, L, ik, t)
-                #else:
-                #    t = T
-                #    ik1 = SWon(E, E0, L, ik, t)
             else:
                 if t <= ton:
                     ik1 = SWon(E, E0, L, ik, t)

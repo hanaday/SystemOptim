@@ -1,4 +1,6 @@
+from cProfile import label
 import numpy as np
+import matplotlib.pyplot as plt
 import time
 
 
@@ -22,8 +24,10 @@ def newton_eta(iL):
         f.write("")
     data = open("./SystemOptim/Newton_ansatz/data_exp_eta.txt", "a")
 
+    graph = []
     for Iph in range(0, 21, 2):
         Iph = Iph*0.1
+        Iph_list = []
         for vL in range(0, 601, 1):
             vL = vL*0.01
             for i in range(100):
@@ -34,9 +38,20 @@ def newton_eta(iL):
                 if abs(iL0(Iph, vL, x)) < delta:
                     if x > 0:
                         print(f"Iph = {Iph}, vL = {vL}, iL = {x}", file=data)
+                        Iph_list.append([vL, x])
                     break
+        graph.append(Iph_list)
 
     data.close()
+    for i in range(0, 11):
+        plot = np.array(graph[i])
+        if len(plot) == 0:
+            continue
+        plt.plot(plot[ :, 0], plot[ :, 1], label="Iph=%.1f" %(0.2*i))
+    plt.xlabel("$V_L$ [V]")
+    plt.ylabel("$i_L$ [A]")
+    plt.legend()
+    plt.show()
 
 def newton_dy(iL):
     eps = 1e-8
@@ -68,8 +83,8 @@ if __name__ == "__main__":
 
     iL = 1
 
-    #newton_eta(iL)
-    newton_dy(iL)
+    newton_eta(iL)
+    #newton_dy(iL)
 
     print("program time =", time.perf_counter() - start)
     print("finish")
